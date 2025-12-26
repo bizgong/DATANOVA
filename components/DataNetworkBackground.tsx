@@ -12,9 +12,7 @@ const DataNetworkBackground: React.FC = () => {
 
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
-
-    const particles: Particle[] = [];
-    const particleCount = Math.min(window.innerWidth / 10, 100); // Responsive count
+    let animationFrameId: number;
 
     class Particle {
       x: number;
@@ -47,6 +45,9 @@ const DataNetworkBackground: React.FC = () => {
         ctx.fill();
       }
     }
+
+    const particleCount = Math.min(window.innerWidth / 10, 100);
+    const particles: Particle[] = [];
 
     const init = () => {
       particles.length = 0;
@@ -82,7 +83,7 @@ const DataNetworkBackground: React.FC = () => {
         p.draw();
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
@@ -95,7 +96,10 @@ const DataNetworkBackground: React.FC = () => {
     animate();
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
