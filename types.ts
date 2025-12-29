@@ -24,3 +24,13 @@ export interface DifferenceItem {
   title: string;
   description: string;
 }
+
+export interface ContactMessage {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+  created_at?: string; // Supabase timestamp column
+  date?: string; // Legacy local support if needed, but primarily using created_at
+}

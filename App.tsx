@@ -17,10 +17,13 @@ import {
   Menu,
   X,
   Mail,
-  Phone
+  Phone,
+  Lock
 } from 'lucide-react';
 import DataNetworkBackground from './components/DataNetworkBackground';
+import AdminDashboard from './components/AdminDashboard';
 import { ServiceItem, StatItem, ProcessStep, DifferenceItem } from './types';
+import { supabase } from './supabaseClient';
 
 // --- Data & Content ---
 
@@ -90,6 +93,15 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      setMobileMenuOpen(false);
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-dark-900/90 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
@@ -101,12 +113,12 @@ const Navbar = () => {
         </div>
         
         <div className="hidden md:flex items-center gap-8">
-          <a href="#about" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">서비스 소개</a>
-          <a href="#features" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">핵심 역량</a>
-          <a href="#process" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">프로세스</a>
-          <button className="px-5 py-2 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all text-sm font-medium">
+          <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="text-gray-300 hover:text-white transition-colors text-sm font-medium">서비스 소개</a>
+          <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="text-gray-300 hover:text-white transition-colors text-sm font-medium">핵심 역량</a>
+          <a href="#process" onClick={(e) => scrollToSection(e, 'process')} className="text-gray-300 hover:text-white transition-colors text-sm font-medium">프로세스</a>
+          <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="px-5 py-2 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all text-sm font-medium">
             문의하기
-          </button>
+          </a>
         </div>
 
         <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -121,10 +133,10 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           className="absolute top-full left-0 right-0 bg-dark-900 border-b border-white/10 p-6 md:hidden flex flex-col gap-4"
         >
-          <a href="#about" className="text-gray-300 hover:text-white py-2">서비스 소개</a>
-          <a href="#features" className="text-gray-300 hover:text-white py-2">핵심 역량</a>
-          <a href="#process" className="text-gray-300 hover:text-white py-2">프로세스</a>
-          <button className="w-full py-3 rounded-lg bg-white text-black font-bold">문의하기</button>
+          <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="text-gray-300 hover:text-white py-2">서비스 소개</a>
+          <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="text-gray-300 hover:text-white py-2">핵심 역량</a>
+          <a href="#process" onClick={(e) => scrollToSection(e, 'process')} className="text-gray-300 hover:text-white py-2">프로세스</a>
+          <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="w-full py-3 rounded-lg bg-white text-black font-bold block text-center">문의하기</a>
         </motion.div>
       )}
     </nav>
@@ -158,18 +170,159 @@ const SectionHeader = ({ title, subtitle, centered = false }: { title: string, s
   </div>
 );
 
+const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validation
+    if(!formData.name || !formData.phone || !formData.email || !formData.message) {
+      alert("모든 항목을 입력해주세요.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Save to Supabase
+      const { error } = await supabase
+        .from('messages')
+        .insert([
+          { 
+            name: formData.name, 
+            phone: formData.phone, 
+            email: formData.email, 
+            message: formData.message 
+          }
+        ]);
+
+      if (error) throw error;
+
+      alert('무료 상담 신청이 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.');
+      setFormData({ name: '', phone: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section id="contact" className="py-24 bg-dark-900 relative border-t border-white/5 scroll-mt-28">
+      <div className="container mx-auto px-6 max-w-4xl">
+        <SectionHeader 
+          title="프로젝트 문의하기" 
+          subtitle="CONTACT US"
+          centered={true}
+        />
+        <div className="bg-dark-800 p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+          
+          <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm text-gray-400 font-medium ml-1">성함</label>
+                <input 
+                  type="text" 
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder:text-gray-600"
+                  placeholder="홍길동"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm text-gray-400 font-medium ml-1">연락처</label>
+                <input 
+                  type="tel" 
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder:text-gray-600"
+                  placeholder="010-1234-5678"
+                />
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <label className="text-sm text-gray-400 font-medium ml-1">이메일</label>
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder:text-gray-600"
+                placeholder="example@company.com"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm text-gray-400 font-medium ml-1">문의사항</label>
+              <textarea 
+                rows={5}
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder:text-gray-600 resize-none"
+                placeholder="프로젝트 내용, 예산, 일정 등 궁금하신 점을 자유롭게 적어주세요."
+              ></textarea>
+            </div>
+
+            <div className="pt-4">
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? '전송 중...' : '무료 상담 신청하기'}
+              </motion.button>
+              <p className="text-center text-gray-500 text-xs mt-4">
+                보내주신 내용은 담당자 확인 후 24시간 이내에 답변 드립니다.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- Main App ---
 
 const App = () => {
   const { scrollYProgress } = useScroll();
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001
   });
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="bg-dark-900 min-h-screen text-white selection:bg-purple-500/30">
+      <AdminDashboard isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} />
+      
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 origin-left z-[60]"
@@ -207,20 +360,19 @@ const App = () => {
             </p>
             
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg shadow-lg shadow-purple-500/30 flex items-center gap-2"
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg shadow-lg shadow-purple-500/30 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all"
               >
                 무료 데이터 진단 받기 <ArrowRight className="w-5 h-5" />
-              </motion.button>
-              <motion.button 
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-full border border-white/20 text-white font-bold text-lg hover:border-white transition-colors"
+              </button>
+              
+              <button 
+                onClick={() => scrollToSection('features')}
+                className="px-8 py-4 rounded-full border border-white/20 text-white font-bold text-lg hover:border-white hover:bg-white/5 transition-all hover:scale-105 active:scale-95"
               >
                 성과 사례 보기
-              </motion.button>
+              </button>
             </div>
           </motion.div>
         </div>
@@ -274,7 +426,7 @@ const App = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 relative overflow-hidden">
+      <section id="about" className="py-24 relative overflow-hidden scroll-mt-28">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <motion.div 
@@ -338,7 +490,7 @@ const App = () => {
       </section>
 
       {/* Services Section */}
-      <section id="features" className="py-24 bg-dark-800 relative">
+      <section id="features" className="py-24 bg-dark-800 relative scroll-mt-28">
         <div className="container mx-auto px-6">
           <SectionHeader 
             title="비즈니스 성장을 위한\n데이터 솔루션" 
@@ -399,7 +551,7 @@ const App = () => {
       </section>
 
       {/* Process Section */}
-      <section id="process" className="py-24 bg-dark-800 relative">
+      <section id="process" className="py-24 bg-dark-800 relative scroll-mt-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
         <div className="container mx-auto px-6 relative z-10">
           <SectionHeader 
@@ -455,24 +607,25 @@ const App = () => {
               성장의 기회를 놓치지 마세요.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-full bg-white text-purple-900 font-bold text-lg hover:bg-gray-100 shadow-lg"
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="px-8 py-4 rounded-full bg-white text-purple-900 font-bold text-lg hover:bg-gray-100 shadow-lg w-full sm:w-auto hover:scale-105 active:scale-95 transition-all"
               >
                 무료 데이터 분석 신청
-              </motion.button>
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-full border border-white text-white font-bold text-lg hover:bg-white/10"
+              </button>
+              
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="px-8 py-4 rounded-full border border-white text-white font-bold text-lg hover:bg-white/10 w-full sm:w-auto hover:scale-105 active:scale-95 transition-all"
               >
                 전문가 상담 요청
-              </motion.button>
+              </button>
             </div>
           </div>
         </motion.div>
       </section>
+
+      <ContactSection />
 
       {/* Footer */}
       <footer className="bg-black py-12 border-t border-white/5 text-gray-500 text-sm">
@@ -487,6 +640,9 @@ const App = () => {
           </div>
 
           <div className="flex gap-4">
+             <button onClick={() => setIsAdminOpen(true)} className="w-8 h-8 rounded-full bg-dark-800 flex items-center justify-center hover:bg-white hover:text-black transition-colors" aria-label="Admin Login">
+               <Lock size={14}/>
+             </button>
              <a href="#" className="w-8 h-8 rounded-full bg-dark-800 flex items-center justify-center hover:bg-white hover:text-black transition-colors"><Mail size={14}/></a>
              <a href="#" className="w-8 h-8 rounded-full bg-dark-800 flex items-center justify-center hover:bg-white hover:text-black transition-colors"><Phone size={14}/></a>
           </div>
