@@ -37,32 +37,38 @@ const servicesData: ServiceItem[] = [
   {
     icon: Users,
     title: "빅데이터 마케팅 전략",
-    description: "고객 행동 데이터를 정밀 분석하여 이탈률을 줄이고 구매 전환률을 극대화하는 최적의 마케팅 퍼널을 설계합니다."
+    description: "고객 행동 데이터를 정밀 분석하여 이탈률을 줄이고 구매 전환률을 극대화하는 최적의 마케팅 퍼널을 설계합니다.",
+    iconColor: "text-blue-400"
   },
   {
     icon: Target,
     title: "퍼포먼스 광고 최적화",
-    description: "단순 노출이 아닌 ROAS(광고비 대비 매출액) 중심의 운영으로 실시간 성과를 모니터링하고 개선합니다."
+    description: "단순 노출이 아닌 ROAS(광고비 대비 매출액) 중심의 운영으로 실시간 성과를 모니터링하고 개선합니다.",
+    iconColor: "text-orange-400"
   },
   {
     icon: PieChart,
     title: "AI 고객 세그먼트 분석",
-    description: "머신러닝 알고리즘을 활용해 구매 가능성이 높은 타겟 고객군을 자동으로 분류하고 맞춤 메시지를 전달합니다."
+    description: "머신러닝 알고리즘을 활용해 구매 가능성이 높은 타겟 고객군을 자동으로 분류하고 맞춤 메시지를 전달합니다.",
+    iconColor: "text-emerald-400"
   },
   {
     icon: Layers,
     title: "CRM & 리텐션 전략",
-    description: "첫 구매 고객을 충성 고객으로 전환시킵니다. 재구매율 상승 전략을 통해 고객 생애 가치(LTV)를 극대화합니다."
+    description: "첫 구매 고객을 충성 고객으로 전환시킵니다. 재구매율 상승 전략을 통해 고객 생애 가치(LTV)를 극대화합니다.",
+    iconColor: "text-amber-400"
   },
   {
     icon: Search,
     title: "SEO & 콘텐츠 인텔리전스",
-    description: "검색 데이터 기반으로 고객의 관심사를 파악하고, 유기적 트래픽을 유도하는 콘텐츠 전략을 수립합니다."
+    description: "검색 데이터 기반으로 고객의 관심사를 파악하고, 유기적 트래픽을 유도하는 콘텐츠 전략을 수립합니다.",
+    iconColor: "text-cyan-400"
   },
   {
     icon: Activity,
     title: "데이터 대시보드",
-    description: "복잡한 데이터를 한눈에 파악할 수 있는 실시간 성과 시각화 대시보드와 의사결정 리포트를 제공합니다."
+    description: "복잡한 데이터를 한눈에 파악할 수 있는 실시간 성과 시각화 대시보드와 의사결정 리포트를 제공합니다.",
+    iconColor: "text-pink-400"
   }
 ];
 
@@ -511,7 +517,7 @@ const App = () => {
               >
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-dark-800 to-dark-700 border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <service.icon className="text-white relative z-10" size={28} />
+                  <service.icon className={`${service.iconColor || 'text-white'} relative z-10`} size={28} />
                 </div>
                 <h3 className="text-xl font-bold mb-4 group-hover:text-purple-400 transition-colors">{service.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>

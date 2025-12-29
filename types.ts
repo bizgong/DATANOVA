@@ -4,6 +4,7 @@ export interface ServiceItem {
   icon: LucideIcon;
   title: string;
   description: string;
+  iconColor?: string;
 }
 
 export interface StatItem {
