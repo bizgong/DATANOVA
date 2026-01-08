@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { 
@@ -44,7 +45,7 @@ const servicesData: ServiceItem[] = [
     icon: Target,
     title: "퍼포먼스 광고 최적화",
     description: "단순 노출이 아닌 ROAS(광고비 대비 매출액) 중심의 운영으로 실시간 성과를 모니터링하고 개선합니다.",
-    iconColor: "text-orange-400"
+    iconColor: "text-teal-400"
   },
   {
     icon: PieChart,
@@ -56,19 +57,19 @@ const servicesData: ServiceItem[] = [
     icon: Layers,
     title: "CRM & 리텐션 전략",
     description: "첫 구매 고객을 충성 고객으로 전환시킵니다. 재구매율 상승 전략을 통해 고객 생애 가치(LTV)를 극대화합니다.",
-    iconColor: "text-amber-400"
+    iconColor: "text-cyan-400"
   },
   {
     icon: Search,
     title: "SEO & 콘텐츠 인텔리전스",
     description: "검색 데이터 기반으로 고객의 관심사를 파악하고, 유기적 트래픽을 유도하는 콘텐츠 전략을 수립합니다.",
-    iconColor: "text-cyan-400"
+    iconColor: "text-sky-400"
   },
   {
     icon: Activity,
     title: "데이터 대시보드",
     description: "복잡한 데이터를 한눈에 파악할 수 있는 실시간 성과 시각화 대시보드와 의사결정 리포트를 제공합니다.",
-    iconColor: "text-pink-400"
+    iconColor: "text-green-400"
   }
 ];
 
@@ -112,7 +113,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-dark-900/90 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <div className="text-2xl font-bold tracking-tighter flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-blue-500 flex items-center justify-center">
             <span className="text-white text-lg font-black">D</span>
           </div>
           <span className="text-white">DATANOVA</span>
@@ -155,10 +156,10 @@ const SectionHeader = ({ title, subtitle, centered = false }: { title: string, s
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="text-pink-500 font-bold text-sm tracking-wider uppercase mb-3 inline-block relative"
+      className="text-blue-500 font-bold text-sm tracking-wider uppercase mb-3 inline-block relative"
     >
       {subtitle}
-      <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-pink-500/50 rounded-full"></span>
+      <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-blue-500/50 rounded-full"></span>
     </motion.span>
     <motion.h2 
       initial={{ opacity: 0, y: 20 }}
@@ -234,7 +235,7 @@ const ContactSection = () => {
           centered={true}
         />
         <div className="bg-dark-800 p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-600/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           
           <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -245,7 +246,7 @@ const ContactSection = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder:text-gray-600"
+                  className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all placeholder:text-gray-600"
                   placeholder="홍길동"
                 />
               </div>
@@ -256,7 +257,7 @@ const ContactSection = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder:text-gray-600"
+                  className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all placeholder:text-gray-600"
                   placeholder="010-1234-5678"
                 />
               </div>
@@ -269,7 +270,7 @@ const ContactSection = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder:text-gray-600"
+                className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all placeholder:text-gray-600"
                 placeholder="example@company.com"
               />
             </div>
@@ -281,7 +282,7 @@ const ContactSection = () => {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder:text-gray-600 resize-none"
+                className="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all placeholder:text-gray-600 resize-none"
                 placeholder="프로젝트 내용, 예산, 일정 등 궁금하신 점을 자유롭게 적어주세요."
               ></textarea>
             </div>
@@ -292,7 +293,7 @@ const ContactSection = () => {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-blue-600 text-white font-bold text-lg shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? '전송 중...' : '무료 상담 신청하기'}
               </motion.button>
@@ -326,12 +327,12 @@ const App = () => {
   };
 
   return (
-    <div className="bg-dark-900 min-h-screen text-white selection:bg-purple-500/30">
+    <div className="bg-dark-900 min-h-screen text-white selection:bg-emerald-500/30">
       <AdminDashboard isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} />
       
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 origin-left z-[60]"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-blue-500 origin-left z-[60]"
         style={{ scaleX }}
       />
 
@@ -342,8 +343,8 @@ const App = () => {
         <DataNetworkBackground />
         
         {/* Abstract Glow Effects */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-600/20 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-600/20 rounded-full blur-[100px] pointer-events-none animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }}></div>
 
         <div className="container mx-auto px-6 relative z-10 text-center">
           <motion.div
@@ -351,12 +352,12 @@ const App = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <span className="inline-block py-1 px-4 rounded-full border border-purple-500/50 bg-purple-500/10 text-purple-300 text-xs font-bold tracking-widest mb-6 backdrop-blur-sm">
+            <span className="inline-block py-1 px-4 rounded-full border border-emerald-500/50 bg-emerald-500/10 text-emerald-300 text-xs font-bold tracking-widest mb-6 backdrop-blur-sm">
               AI DRIVEN MARKETING
             </span>
             <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight tracking-tight">
               데이터로 증명하는 마케팅,<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-white">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-blue-400 to-white">
                 숫자가 매출이 되는 순간
               </span>
             </h1>
@@ -368,7 +369,7 @@ const App = () => {
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg shadow-lg shadow-purple-500/30 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all"
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-emerald-600 to-blue-600 text-white font-bold text-lg shadow-lg shadow-emerald-500/30 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all"
               >
                 무료 데이터 진단 받기 <ArrowRight className="w-5 h-5" />
               </button>
@@ -401,7 +402,7 @@ const App = () => {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
              <h3 className="text-xl md:text-2xl font-bold">
-               데이터로 성장하는 기업들이 <span className="text-pink-500">DATANOVA</span>를 선택합니다
+               데이터로 성장하는 기업들이 <span className="text-blue-500">DATANOVA</span>를 선택합니다
              </h3>
           </div>
           
@@ -413,16 +414,16 @@ const App = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="p-8 rounded-2xl bg-dark-700/50 border border-white/5 hover:border-purple-500/50 transition-colors group relative overflow-hidden"
+                className="p-8 rounded-2xl bg-dark-700/50 border border-white/5 hover:border-emerald-500/50 transition-colors group relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/20 transition-all"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-500/20 transition-all"></div>
                 
-                <div className="w-12 h-12 rounded-lg bg-dark-800 flex items-center justify-center mb-6 text-pink-500 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-lg bg-dark-800 flex items-center justify-center mb-6 text-blue-500 group-hover:scale-110 transition-transform duration-300">
                   <stat.icon size={24} />
                 </div>
                 <div className="text-4xl md:text-5xl font-black text-white mb-2 flex items-baseline">
                   {stat.value}
-                  <span className="text-2xl text-purple-400 ml-1">{stat.suffix}</span>
+                  <span className="text-2xl text-emerald-400 ml-1">{stat.suffix}</span>
                 </div>
                 <p className="text-gray-400 font-medium">{stat.label}</p>
               </motion.div>
@@ -445,10 +446,10 @@ const App = () => {
                 {/* Visual representation of data funnel */}
                 <div className="aspect-video bg-gradient-to-b from-dark-800 to-black p-8 relative flex items-center justify-center">
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558494949-efc5270f9c63?q=80&w=2400&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay"></div>
-                  <div className="relative z-10 w-full h-full border border-purple-500/30 rounded-xl flex items-center justify-center">
+                  <div className="relative z-10 w-full h-full border border-emerald-500/30 rounded-xl flex items-center justify-center">
                     <div className="text-center">
-                      <div className="w-20 h-20 mx-auto rounded-full border-4 border-t-purple-500 border-r-pink-500 border-b-purple-500 border-l-transparent animate-spin mb-4"></div>
-                      <p className="text-purple-300 font-mono text-sm">PROCESSING DATA...</p>
+                      <div className="w-20 h-20 mx-auto rounded-full border-4 border-t-emerald-500 border-r-blue-500 border-b-emerald-500 border-l-transparent animate-spin mb-4"></div>
+                      <p className="text-emerald-300 font-mono text-sm">PROCESSING DATA...</p>
                     </div>
                   </div>
                 </div>
@@ -461,7 +462,7 @@ const App = () => {
               viewport={{ once: true }}
               className="lg:w-1/2 w-full"
             >
-              <span className="text-pink-500 font-bold text-sm tracking-wider uppercase mb-2 block">ABOUT US</span>
+              <span className="text-blue-500 font-bold text-sm tracking-wider uppercase mb-2 block">ABOUT US</span>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 전략과 데이터가<br />
                 만나는 지점
@@ -479,7 +480,7 @@ const App = () => {
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4">
                     <div className="mt-1">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-emerald-500 to-blue-500 flex items-center justify-center">
                         <CheckCircle2 size={14} className="text-white" />
                       </div>
                     </div>
@@ -513,13 +514,13 @@ const App = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
-                className="bg-dark-900/80 p-8 rounded-2xl border border-white/5 hover:border-pink-500/50 transition-all group duration-300 shadow-lg hover:shadow-purple-900/20"
+                className="bg-dark-900/80 p-8 rounded-2xl border border-white/5 hover:border-blue-500/50 transition-all group duration-300 shadow-lg hover:shadow-emerald-900/20"
               >
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-dark-800 to-dark-700 border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <service.icon className={`${service.iconColor || 'text-white'} relative z-10`} size={28} />
                 </div>
-                <h3 className="text-xl font-bold mb-4 group-hover:text-purple-400 transition-colors">{service.title}</h3>
+                <h3 className="text-xl font-bold mb-4 group-hover:text-emerald-400 transition-colors">{service.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
               </motion.div>
             ))}
@@ -543,8 +544,8 @@ const App = () => {
                 viewport={{ once: true }}
                 className="flex items-center gap-6 p-6 rounded-xl bg-dark-800 border border-white/5"
               >
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-pink-500/10 flex items-center justify-center">
-                  <item.icon className="text-pink-500" size={24} />
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center">
+                  <item.icon className="text-blue-500" size={24} />
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-white">{item.title}</h4>
@@ -558,7 +559,7 @@ const App = () => {
 
       {/* Process Section */}
       <section id="process" className="py-24 bg-dark-800 relative scroll-mt-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-900/20 via-transparent to-transparent"></div>
         <div className="container mx-auto px-6 relative z-10">
           <SectionHeader 
             title="성공을 위한 5단계 프로세스" 
@@ -568,7 +569,7 @@ const App = () => {
           <p className="text-center text-gray-400 -mt-10 mb-20">체계적인 접근 방식으로 성공 확률을 높입니다.</p>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 relative">
-            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent -z-10"></div>
+            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent -z-10"></div>
             
             {processData.map((item, index) => (
               <motion.div
@@ -579,7 +580,7 @@ const App = () => {
                 transition={{ delay: index * 0.15 }}
                 className="text-center group"
               >
-                <div className="w-24 h-24 mx-auto bg-dark-900 rounded-full border-4 border-dark-800 flex items-center justify-center mb-6 relative group-hover:border-purple-500 transition-colors duration-500">
+                <div className="w-24 h-24 mx-auto bg-dark-900 rounded-full border-4 border-dark-800 flex items-center justify-center mb-6 relative group-hover:border-emerald-500 transition-colors duration-500">
                   <span className="text-3xl font-black text-white">{item.step}</span>
                   <div className="absolute inset-0 rounded-full border border-white/10 scale-125 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"></div>
                 </div>
@@ -600,7 +601,7 @@ const App = () => {
           className="rounded-3xl p-12 md:p-20 relative overflow-hidden text-center"
         >
           {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900 to-blue-900 opacity-80"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900 to-blue-900 opacity-80"></div>
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30 mix-blend-overlay"></div>
           
           <div className="relative z-10">
@@ -608,14 +609,14 @@ const App = () => {
               당신의 데이터를,<br />
               성장으로 바꿀 준비가 되셨나요?
             </h2>
-            <p className="text-purple-100 text-lg mb-10">
+            <p className="text-emerald-100 text-lg mb-10">
               지금 무료로 귀사의 마케팅 데이터를 진단 해 드립니다.<br />
               성장의 기회를 놓치지 마세요.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="px-8 py-4 rounded-full bg-white text-purple-900 font-bold text-lg hover:bg-gray-100 shadow-lg w-full sm:w-auto hover:scale-105 active:scale-95 transition-all"
+                className="px-8 py-4 rounded-full bg-white text-emerald-900 font-bold text-lg hover:bg-gray-100 shadow-lg w-full sm:w-auto hover:scale-105 active:scale-95 transition-all"
               >
                 무료 데이터 분석 신청
               </button>

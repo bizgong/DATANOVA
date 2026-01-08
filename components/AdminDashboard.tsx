@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { X, Lock, User, Settings, MessageSquare, LogOut, Trash2 } from 'lucide-react';
 import { ContactMessage } from '../types';
@@ -120,7 +121,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-white/10 bg-dark-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-600 to-blue-600 flex items-center justify-center">
               <Lock className="text-white" size={20} />
             </div>
             <div>
@@ -151,7 +152,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                       type="text" 
                       value={loginId}
                       onChange={(e) => setLoginId(e.target.value)}
-                      className="w-full bg-dark-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none"
+                      className="w-full bg-dark-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-emerald-500 focus:outline-none"
                       placeholder="admin"
                     />
                   </div>
@@ -161,7 +162,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                       type="password" 
                       value={loginPw}
                       onChange={(e) => setLoginPw(e.target.value)}
-                      className="w-full bg-dark-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none"
+                      className="w-full bg-dark-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-emerald-500 focus:outline-none"
                       placeholder="password"
                     />
                   </div>
@@ -169,7 +170,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
 
                 {loginError && <p className="text-red-500 text-sm text-center">{loginError}</p>}
 
-                <button type="submit" className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold transition-colors">
+                <button type="submit" className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold transition-colors">
                   대시보드 진입
                 </button>
               </form>
@@ -182,13 +183,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                 <div className="p-4 space-y-2">
                   <button 
                     onClick={() => setActiveTab('messages')}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${activeTab === 'messages' ? 'bg-purple-600/20 text-purple-400 border border-purple-600/50' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${activeTab === 'messages' ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-600/50' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
                   >
                     <MessageSquare size={18} /> 상담 문의
                   </button>
                   <button 
                     onClick={() => setActiveTab('settings')}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${activeTab === 'settings' ? 'bg-purple-600/20 text-purple-400 border border-purple-600/50' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${activeTab === 'settings' ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-600/50' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
                   >
                     <Settings size={18} /> 계정 설정
                   </button>
@@ -206,13 +207,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                 <div className="flex md:hidden gap-2 mb-6">
                    <button 
                     onClick={() => setActiveTab('messages')}
-                    className={`flex-1 py-2 text-sm rounded-lg font-medium ${activeTab === 'messages' ? 'bg-purple-600 text-white' : 'bg-dark-800 text-gray-400'}`}
+                    className={`flex-1 py-2 text-sm rounded-lg font-medium ${activeTab === 'messages' ? 'bg-emerald-600 text-white' : 'bg-dark-800 text-gray-400'}`}
                   >
                     문의 목록
                   </button>
                    <button 
                     onClick={() => setActiveTab('settings')}
-                    className={`flex-1 py-2 text-sm rounded-lg font-medium ${activeTab === 'settings' ? 'bg-purple-600 text-white' : 'bg-dark-800 text-gray-400'}`}
+                    className={`flex-1 py-2 text-sm rounded-lg font-medium ${activeTab === 'settings' ? 'bg-emerald-600 text-white' : 'bg-dark-800 text-gray-400'}`}
                   >
                     설정
                   </button>
@@ -231,11 +232,11 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                     ) : (
                       <div className="grid gap-4">
                         {messages.map((msg) => (
-                          <div key={msg.id} className="bg-dark-800 p-6 rounded-xl border border-white/5 hover:border-purple-500/30 transition-all">
+                          <div key={msg.id} className="bg-dark-800 p-6 rounded-xl border border-white/5 hover:border-emerald-500/30 transition-all">
                             <div className="flex justify-between items-start mb-4">
                               <div>
                                 <h4 className="text-lg font-bold text-white">{msg.name} <span className="text-sm font-normal text-gray-500 ml-2">{formatDate(msg.created_at || msg.date)}</span></h4>
-                                <div className="text-sm text-purple-400 mt-1">{msg.phone} / {msg.email}</div>
+                                <div className="text-sm text-emerald-400 mt-1">{msg.phone} / {msg.email}</div>
                               </div>
                               <button 
                                 onClick={() => handleDeleteMessage(msg.id)}
@@ -265,7 +266,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                             type="text" 
                             value={newId}
                             onChange={(e) => setNewId(e.target.value)}
-                            className="w-full bg-dark-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none"
+                            className="w-full bg-dark-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-emerald-500 focus:outline-none"
                           />
                         </div>
                         <div>
@@ -274,13 +275,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                             type="password" 
                             value={newPw}
                             onChange={(e) => setNewPw(e.target.value)}
-                            className="w-full bg-dark-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none"
+                            className="w-full bg-dark-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-emerald-500 focus:outline-none"
                           />
                         </div>
                         
                         {settingsMsg && <p className="text-green-400 text-sm">{settingsMsg}</p>}
 
-                        <button type="submit" className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold transition-colors mt-4">
+                        <button type="submit" className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold transition-colors mt-4">
                           정보 변경 저장
                         </button>
                      </form>

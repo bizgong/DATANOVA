@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 
 const DataNetworkBackground: React.FC = () => {
@@ -41,7 +42,7 @@ const DataNetworkBackground: React.FC = () => {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(168, 85, 247, 0.5)'; // Purple tint
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.5)'; // Emerald tint
         ctx.fill();
       }
     }
@@ -69,7 +70,7 @@ const DataNetworkBackground: React.FC = () => {
 
           if (distance < 150) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(217, 70, 239, ${1 - distance / 150})`; // Pinkish fade
+            ctx.strokeStyle = `rgba(59, 130, 246, ${1 - distance / 150})`; // Blue fade
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
